@@ -459,7 +459,7 @@ p { margin: 0 0 1em; text-wrap: pretty; }
 .evidencia { align-self: center; }
 .marco .sello {
   position: absolute; z-index: 3;
-  right: -18px; bottom: 64px;
+  right: 18px; bottom: 64px;
   --giro: -6deg;
   background: var(--papel);
   font-size: clamp(1.375rem, 2vw, 1.875rem);
@@ -832,7 +832,7 @@ p { margin: 0 0 1em; text-wrap: pretty; }
   .portada-campos { grid-template-columns: 1fr; }
   .portada-campos .campo:nth-child(2) { border-left: 0; border-top: var(--linea) solid rgba(255,255,255,.55); }
   .acciones .btn { flex: 1 1 100%; }
-  .marco .sello { right: -6px; bottom: 56px; font-size: 1.25rem; }
+  .marco .sello { right: 12px; bottom: 56px; font-size: 1.25rem; }
   .punto { display: none; }
   .indice { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .indice a { min-height: 132px; padding: 14px; }

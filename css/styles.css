@@ -60,6 +60,7 @@ img { max-width: 100%; height: auto; display: block; }
 a { color: inherit; text-underline-offset: .2em; text-decoration-thickness: 1.5px; }
 ::selection { background: var(--sello); color: #fff; }
 :focus-visible { outline: 3px solid var(--amarillo); outline-offset: 3px; border-radius: 2px; }
+.hoja :focus-visible, .talon :focus-visible, .marco :focus-visible, .logo:focus-visible { outline-color: var(--sello); }
 
 html { scrollbar-color: var(--stock) var(--banco); }
 ::-webkit-scrollbar { width: 12px; height: 12px; }

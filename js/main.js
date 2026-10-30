@@ -61,6 +61,20 @@
     });
   });
 
+  /* ---------- Mapa: carga Google Maps solo al pedirlo ---------- */
+  document.querySelectorAll('[data-mapa-cargar]').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var mapa = btn.closest('[data-mapa]');
+      var iframe = document.createElement('iframe');
+      iframe.src = mapa.getAttribute('data-mapa');
+      iframe.title = 'Mapa: Calle 71 # 27-57, La Libertad, Barrancabermeja';
+      iframe.referrerPolicy = 'no-referrer-when-downgrade';
+      mapa.innerHTML = '';
+      mapa.classList.add('is-cargado');
+      mapa.appendChild(iframe);
+    });
+  });
+
   /* ---------- Lomo del catálogo: marca la línea visible ---------- */
   var lomoLinks = document.querySelectorAll('.lomo a[href^="#"]');
   if (lomoLinks.length && 'IntersectionObserver' in window) {

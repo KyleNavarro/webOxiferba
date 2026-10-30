@@ -284,25 +284,23 @@ p { margin: 0 0 1em; text-wrap: pretty; }
   text-align: center;
   transform: rotate(var(--giro, -6deg));
   filter: url(#tinta);
-  mix-blend-mode: multiply;
-  opacity: .92;
 }
 .sello small {
-  display: block; margin-top: 4px;
-  font: 700 .8125rem/1.1 var(--f-label); letter-spacing: .14em;
+  display: block; margin-top: 6px;
+  font: 700 .9375rem/1.1 var(--f-label); letter-spacing: .12em;
 }
 .sello--blanco { color: #fff; border-color: #fff; mix-blend-mode: normal; opacity: .95; }
 
 /* Aterrizaje del sello: un solo momento, la primera vez */
 @keyframes sellar {
   0%   { opacity: 0; transform: rotate(var(--giro, -6deg)) scale(1.18); }
-  60%  { opacity: .92; }
-  100% { opacity: .92; transform: rotate(var(--giro, -6deg)) scale(1); }
+  60%  { opacity: 1; }
+  100% { opacity: 1; transform: rotate(var(--giro, -6deg)) scale(1); }
 }
 .sello--aterriza { animation: sellar 340ms var(--ease-out) 450ms both; }
 @media (prefers-reduced-motion: reduce) {
   .sello--aterriza { animation: sellar-suave 200ms ease 200ms both; }
-  @keyframes sellar-suave { from { opacity: 0; } to { opacity: .92; } }
+  @keyframes sellar-suave { from { opacity: 0; } to { opacity: 1; } }
 }
 
 /* ---------- Campos impresos ---------- */
@@ -412,8 +410,8 @@ p { margin: 0 0 1em; text-wrap: pretty; }
   content: "";
   position: absolute; z-index: 2; top: -6px; left: 28px;
   width: 46px; height: 7px; border-radius: 2px;
-  background: linear-gradient(#d9dde0, #8e979d);
-  box-shadow: 0 1px 1px rgba(0,0,0,.4);
+  background: #c3c9cd;
+  border: 1px solid var(--tinta);
   transform: rotate(-4deg);
 }
 .diapos {
@@ -458,12 +456,16 @@ p { margin: 0 0 1em; text-wrap: pretty; }
 .flecha:active { transform: scale(.92); }
 @media (hover: hover) and (pointer: fine) { .flecha:hover { background: var(--papel-2); } }
 
-.evidencia .sello {
-  margin: 36px 12px 0 0;
+.evidencia { align-self: center; }
+.marco .sello {
+  position: absolute; z-index: 3;
+  right: -18px; bottom: 64px;
   --giro: -6deg;
+  background: var(--papel);
   font-size: clamp(1.375rem, 2vw, 1.875rem);
+  box-shadow: 0 6px 14px -8px rgba(0,0,0,.45);
 }
-.evidencia .sello { mix-blend-mode: normal; color: var(--papel); border-color: var(--papel); filter: url(#tinta) drop-shadow(0 1px 0 rgba(0,0,0,.25)); }
+.marco .sello--marco { font-size: clamp(1.125rem, 1.6vw, 1.5rem); right: 24px; bottom: -28px; }
 
 /* Talón desprendible: tres accesos */
 .talon {
@@ -661,8 +663,8 @@ p { margin: 0 0 1em; text-wrap: pretty; }
   font-weight: 500;
 }
 .items li::before {
-  content: ""; flex: none; width: 14px; height: 14px; margin-top: .3em;
-  border: 2px solid var(--tinta); border-radius: 2px;
+  content: ""; flex: none; width: 12px; height: 2px; margin-top: .8em;
+  background: var(--stock);
 }
 .linea-foto { grid-area: foto; padding: 20px 28px 28px 0; position: relative; }
 .linea-foto img {
@@ -771,7 +773,7 @@ p { margin: 0 0 1em; text-wrap: pretty; }
 .form-campo textarea { min-height: 160px; resize: vertical; }
 .form-campo input::placeholder, .form-campo textarea::placeholder { color: #69786d; }
 .form-campo input:focus, .form-campo textarea:focus { outline: none; }
-.form-campo:focus-within { background: var(--papel-2); box-shadow: inset 4px 0 0 0 var(--sello); }
+.form-campo:focus-within { background: var(--papel-2); outline: 2px solid var(--sello); outline-offset: -2px; }
 .form-campo .error {
   display: none; padding: 0 16px 12px;
   font: 600 .9375rem/1.3 var(--f-body); color: var(--rojo);
@@ -782,8 +784,9 @@ p { margin: 0 0 1em; text-wrap: pretty; }
 .form-acciones { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
 .form-estado { margin: 16px 0 0; font-weight: 600; color: var(--stock); min-height: 1.6em; }
 .facebook { display: inline-flex; align-items: center; gap: 12px; }
-.mapa { aspect-ratio: 4 / 3; overflow: hidden; border-radius: 4px; background: var(--banco-2); }
-.mapa iframe { width: 100%; height: 100%; border: 0; display: block; filter: saturate(.85); }
+.mapa { display: grid; gap: 16px; }
+.mapa.is-cargado { aspect-ratio: 4 / 3; overflow: hidden; border-radius: 4px; background: var(--banco-2); gap: 0; }
+.mapa iframe { width: 100%; height: 100%; border: 0; display: block; }
 
 /* ==========================================================================
    RESPONSIVO
@@ -829,7 +832,7 @@ p { margin: 0 0 1em; text-wrap: pretty; }
   .portada-campos { grid-template-columns: 1fr; }
   .portada-campos .campo:nth-child(2) { border-left: 0; border-top: var(--linea) solid rgba(255,255,255,.55); }
   .acciones .btn { flex: 1 1 100%; }
-  .evidencia .sello { margin: 28px 4px 0 0; }
+  .marco .sello { right: -6px; bottom: 56px; font-size: 1.25rem; }
   .punto { display: none; }
   .indice { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .indice a { min-height: 132px; padding: 14px; }
